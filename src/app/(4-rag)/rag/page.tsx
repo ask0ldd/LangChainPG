@@ -29,6 +29,7 @@ export default async function RAG() {
     ["user", "{question}"]
   ]);
 
+  // explain semantic chunking
   const splitter = new RecursiveCharacterTextSplitter({
     chunkSize: 1000, chunkOverlap: 200
   });
