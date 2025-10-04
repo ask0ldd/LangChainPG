@@ -2,8 +2,8 @@
 import { ChatGroq } from "@langchain/groq";
 import { MemorySaver } from "@langchain/langgraph";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
-import { sentimentTool } from "../../(6-graph)/graph/_tools/sentimentAnalyzer";
-import orderRetrieveTool from "../../(6-graph)/graph/_tools/orderRetrieveTool";
+import { sentimentTool } from "../../(7-advancedgraph)/-advancedgraph/_tools/sentimentAnalyzer";
+import orderRetrieveTool from "../../(7-advancedgraph)/-advancedgraph/_tools/itemIdentificationTool";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 // https://js.langchain.com/docs/concepts/tool_calling/
 // https://www.youtube.com/watch?v=pi3C6y4gWFA
