@@ -4,7 +4,7 @@ import { OllamaEmbeddings } from "@langchain/ollama";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { stateOfTheUnionDoc } from "./_docs/stateoftheunion";
-import { Document } from "langchain/document";
+import { Document } from "langchain/document"; // !!! import Document
 // https://js.langchain.com/docs/tutorials/rag/
 // positionnement dans l'espace
 // valeur semantique
