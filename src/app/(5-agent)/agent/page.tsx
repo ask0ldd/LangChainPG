@@ -2,9 +2,8 @@
 import { ChatGroq } from "@langchain/groq";
 import { MemorySaver } from "@langchain/langgraph";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
-import { sentimentTool } from "../../(7-advancedgraph)/-advancedgraph/_tools/sentimentAnalyzer";
-import orderRetrieveTool from "../../(7-advancedgraph)/-advancedgraph/_tools/itemIdentificationTool";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
+import sentimentAnalyzerTool from "./_tools/sentimentAnalyzerTool";
 // https://js.langchain.com/docs/concepts/tool_calling/
 // https://www.youtube.com/watch?v=pi3C6y4gWFA
 // https://github.com/in-tech-gration/LangChain.js
@@ -24,7 +23,7 @@ export default async function Agent(){
   // Creates a StateGraph agent that relies on a chat model utilizing tool calling.
   const agent = createReactAgent({
     llm: agentModel,
-    tools: [sentimentTool, orderRetrieveTool],
+    tools: [sentimentAnalyzerTool],
     checkpointSaver: agentCheckpointSaver,
   })
 
