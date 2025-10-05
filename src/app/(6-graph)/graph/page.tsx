@@ -1,7 +1,7 @@
 import { ChatGroq } from "@langchain/groq";
 import { ToolNode } from "@langchain/langgraph/prebuilt";
 import { AIMessage, HumanMessage } from "@langchain/core/messages";
-import { MessagesAnnotation, StateGraph } from "@langchain/langgraph";
+import { END, MessagesAnnotation, START, StateGraph } from "@langchain/langgraph";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import sentimentAnalyzerTool from "./_tools/sentimentAnalyzerTool";
 import orderRetrievalTool from "./_tools/orderRetrievalTool";
@@ -25,7 +25,7 @@ export default async function Graph() {
 
     // define graph edges
     workflow
-        .addEdge("__start__", "agent") // __start__ is a special name for the entrypoint
+        .addEdge(START, "agent") // __start__ is a special name for the entrypoint
         .addConditionalEdges("agent", shouldContinue)
         .addEdge("tools", "agent")
 
@@ -63,8 +63,8 @@ export default async function Graph() {
         if (lastMessage.tool_calls?.length) {
             return "tools"
         }
-        // Otherwise, we stop (reply to the user) using the special "__end__" node
-        return "__end__"
+        // Otherwise, we stop (reply to the user) using the special END node
+        return END
     }
 
     // Define the function that calls the model
