@@ -12,12 +12,6 @@ const faqTool = tool(
         const embeddingModel = new OllamaEmbeddings()
         const itemsVectorStore = new MemoryVectorStore(embeddingModel);
 
-        /*const splitter = new RecursiveCharacterTextSplitter({
-            chunkSize: 1000, chunkOverlap: 200
-        });
-    
-        const splits = await splitter.splitText(faq); // !!! should split by QA paris*/
-
         const documents: Document<{chunk: number;}>[] = []
 
         faq.forEach(section => {
@@ -30,10 +24,6 @@ const faqTool = tool(
                 )
             })
         })
-    
-        /*const documents = splits.map(
-            (text, idx) => new Document({ pageContent: text, metadata: { chunk: idx } })
-        )*/
         
         await itemsVectorStore.addDocuments(documents)
 
