@@ -1,14 +1,13 @@
 import { ChatGroq } from "@langchain/groq";
 import { ToolNode } from "@langchain/langgraph/prebuilt";
-import { AIMessage, HumanMessage } from "@langchain/core/messages";
+import { AIMessage } from "@langchain/core/messages";
 import { END, MessagesAnnotation, START, StateGraph } from "@langchain/langgraph";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import sentimentAnalyzerTool from "./_tools/sentimentAnalyzerTool";
-import orderRetrievalTool from "./_tools/orderRetrievalTool";
 
 export default async function Graph() {
 
-    const tools = [sentimentAnalyzerTool, orderRetrievalTool]
+    const tools = [sentimentAnalyzerTool]
     const model = new ChatGroq({
         model: "gemma2-9b-it",
         temperature: 0.7,
