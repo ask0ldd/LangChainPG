@@ -9,9 +9,9 @@ export default async function Graph() {
 
     const tools = [sentimentAnalyzerTool]
     const model = new ChatGroq({
-        model: "gemma2-9b-it",
-        temperature: 0.7,
-        maxTokens: 100,
+        model: "openai/gpt-oss-20b",
+        temperature: 0.3,
+        maxTokens: 300,
         maxRetries: 2,
     }).bindTools(tools)
 
@@ -32,7 +32,7 @@ export default async function Graph() {
 
     const sentimentPromptTemplate = ChatPromptTemplate.fromMessages([
         ["system", "You are a customer feedback analysis assistant."],
-        ["human", `Rate the following review: "{review}".`]
+        ["human", `Rate the following review: "{review}". Simply output the adjective best describing the sentiment associated with the review.`]
     ]);
 
     const negativeReview = "The product is far too large. It doesn't seem the match an european XL size."
@@ -41,14 +41,15 @@ export default async function Graph() {
     const finalState = await compiledGraph.invoke({ 
       messages: await sentimentPromptTemplate.formatMessages({review : negativeReview})
     })
-    console.log(finalState.messages[finalState.messages.length - 1].content)
+    const finalMessage = finalState.messages[finalState.messages.length - 1].content ?? ''
+    console.log(finalMessage)
 
     return (
         <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
         <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
             <span>content</span>
             <div>
-            LangGraph
+            {finalMessage.toString()}
             </div>
         </main>
         </div>

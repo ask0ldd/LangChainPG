@@ -12,9 +12,9 @@ import sentimentAnalyzerTool from "./_tools/sentimentAnalyzerTool";
 export default async function Agent(){
 
   const agentModel = new ChatGroq({
-    model: "gemma2-9b-it",
-    temperature: 0.7,
-    maxTokens: 100,
+    model: "openai/gpt-oss-20b",
+    temperature: 0.3,
+    maxTokens: 300,
     maxRetries: 2,
   })
 
