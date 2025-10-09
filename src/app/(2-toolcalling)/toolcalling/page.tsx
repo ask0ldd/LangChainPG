@@ -7,8 +7,8 @@ import { multiplyTool } from "./_tools/multiplyTool";
 
 export default async function ToolCalling() {
   const grodModel = new ChatGroq({
-    model: "gemma2-9b-it",
-    temperature: 0.7,
+    model: "openai/gpt-oss-20b",
+    temperature: 0.3,
     maxTokens: 100,
     maxRetries: 2,
   })
@@ -50,7 +50,7 @@ export default async function ToolCalling() {
     }
   }
 
-  console.log(resultMessage.response_metadata.tokenUsage.totalTokens)
+  // console.log(resultMessage.response_metadata.tokenUsage.totalTokens)
 
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">

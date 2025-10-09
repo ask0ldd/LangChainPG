@@ -17,8 +17,8 @@ export default async function RAG() {
   const vectorStore = new MemoryVectorStore(embeddingModel);
   
   const model2 = new ChatGroq({
-    model: "gemma2-9b-it",
-    temperature: 0.7,
+    model: "openai/gpt-oss-20b",
+    temperature: 0.3,
     maxTokens: 100,
     maxRetries: 2,
   })
