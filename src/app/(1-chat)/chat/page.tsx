@@ -1,5 +1,6 @@
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { ChatGroq } from "@langchain/groq";
+import { ChatOllama } from "@langchain/ollama";
 // https://js.langchain.com/docs/concepts/tool_calling/
 // https://www.youtube.com/watch?v=pi3C6y4gWFA
 // https://github.com/in-tech-gration/LangChain.js
@@ -7,10 +8,16 @@ import { ChatGroq } from "@langchain/groq";
 
 export default async function Chat() {
 
-  const groqChatModel = new ChatGroq({
+  /*const groqChatModel = new ChatGroq({
     model: "openai/gpt-oss-20b",
     temperature: 0.3,
     maxTokens: 100,
+    maxRetries: 2,
+  })*/
+
+  const groqChatModel = new ChatOllama({
+    model: "gemma3:12b",
+    temperature: 0.3,
     maxRetries: 2,
   })
 
@@ -19,7 +26,7 @@ export default async function Chat() {
     for interacting with them. To simply call the model, we can pass in a list of messages to the .invoke method.
   */
   const messages = [
-    new SystemMessage("Translate the following from English to French."), // !!! what is a system message ?!
+    new SystemMessage("Translate the following from English to French. Output only the translated sentence."), // !!! what is a system message ?!
     new HumanMessage("I'm learning how to use the Langchain framework."),
   ];
 
@@ -78,13 +85,15 @@ export default async function Chat() {
   */
 
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <span>content</span>
-        <div>
-          LangGraph
-        </div>
-      </main>
-    </div>
+      <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+        {
+          resultMessage.content ? 
+          <main className="flex flex-col row-start-2 items-center sm:items-start w-full max-w-[1440px]">
+              <span className="p-[20px] bg-blue-100 w-full">Q : {messages[0].text}</span>
+              <span className="p-[20px] bg-blue-200 w-full">{messages[1].text}</span>
+              <span className="p-[20px]">A : {resultMessage.content.toString()}</span>
+          </main> : <main>loading</main>
+        }
+      </div>
   );
 }
