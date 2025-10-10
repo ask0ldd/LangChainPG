@@ -9,6 +9,7 @@ import faqSchema from "../_schemas/faqSchema";
 
 const faqTool = tool(
     async ({question}) => {
+        console.log('Q : ', question)
         const embeddingModel = new OllamaEmbeddings()
         const itemsVectorStore = new MemoryVectorStore(embeddingModel);
 
@@ -39,7 +40,7 @@ const faqTool = tool(
     {
         name: "faqDatabase",
         schema: faqSchema,
-        description: "Retrieve general knowledge related to the following topics: Revolt Clothing’s brand identity, product details, materials, sizing guidance, ordering process, payment methods, shipping and delivery policies, returns and exchanges, community engagement, influencer and ambassador programs, customization options, wholesale inquiries, and customer support services.", 
+        description: "Retrieve FAQ knowledge related to the following topics: Revolt Clothing’s brand identity, product details, materials, sizing guidance, ordering process, payment methods, shipping and delivery policies, returns and exchanges, community engagement, influencer and ambassador programs, customization options, wholesale inquiries, and customer support services.", 
     }
 )
 
