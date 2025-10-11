@@ -39,6 +39,7 @@ export default async function ToolCalling() {
 
     That means this.tool_calls is just a direct alias for kwargs.tool_calls.
   */
+  // !!! show empty tool_calls array in previous main.py AI message
   if(resultMessage.tool_calls){
     for (const toolCall of resultMessage.tool_calls) {
       const toolName = toolCall.name
