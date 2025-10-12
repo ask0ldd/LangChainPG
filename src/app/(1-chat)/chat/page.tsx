@@ -1,5 +1,4 @@
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
-import { ChatGroq } from "@langchain/groq";
 import { ChatOllama } from "@langchain/ollama";
 // https://js.langchain.com/docs/concepts/tool_calling/
 // https://www.youtube.com/watch?v=pi3C6y4gWFA
