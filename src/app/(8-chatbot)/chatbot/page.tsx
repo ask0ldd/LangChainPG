@@ -3,11 +3,11 @@ import { ToolNode } from "@langchain/langgraph/prebuilt";
 import { AIMessage } from "@langchain/core/messages";
 import { END, MessagesAnnotation, START, StateGraph } from "@langchain/langgraph";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import sentimentAnalyzerTool from "./_tools/sentimentAnalyzerTool";
+import orderRetrievalTool from "./_tools/orderRetrievalTool";
 
 export default async function Graph() {
 
-    const tools = [sentimentAnalyzerTool]
+    const tools = [orderRetrievalTool]
     const model = new ChatGroq({
         model: "openai/gpt-oss-20b",
         temperature: 0.3,
