@@ -3,7 +3,7 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { Document } from "langchain/document";
 import faq from "../_datas/faq";
 import { OllamaEmbeddings } from "@langchain/ollama";
-import faqSchema from "../_schemas/faqSchema";
+import faqSchema from "../_schemas/faqInputSchema";
 
 // pas besoin de split, creer des docs QA pairs suffisants, besoin de la valeur semantique de la pair
 
