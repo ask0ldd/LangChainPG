@@ -30,16 +30,24 @@ export default async function Booking() {
 
     const compiledGraph = workflow.compile()
 
-    const sentimentPromptTemplate = ChatPromptTemplate.fromMessages([
-        ["system", "You are a booking assistant. Use the given tool to find the appointment matching best the customer request."],
-        ["human", `Customer request : `]
+    const agendaBookingPromptTemplate = ChatPromptTemplate.fromMessages([
+        ["system", `You are a booking assistant. Your goal is to find and suggest the appointment that best matches the customer’s request. 
+            Use the provided booking tool to search available slots. 
+            Morning appointments are between 09:00:00 and 11:30:00.
+            Afternoon appointments are between 13:00:00 and 15:30:00.
+            The current year is 2025. 
+            Always provide times in the specified format (HH:MM:SS).
+        `],
+        ["human", `Customer request : "{request}"`]
     ]);
 
-    const negativeReview = "The product is far too large. It doesn't seem the match an european XL size."
+    // const appointmentRequest = "I would like to set an appointment for next monday in the afternoon"
+    const appointmentRequest = "I would like to schedule an appointment for november the 4th during the afternoon."
+    // const appointmentRequest2 = "I would like to schedule an appointment for november the 4th during the afternoon. Give me the latest free slot."
 
     // Use the graph
     const finalState = await compiledGraph.invoke({ 
-      messages: await sentimentPromptTemplate.formatMessages({review : negativeReview})
+        messages: await agendaBookingPromptTemplate.formatMessages({request : appointmentRequest})
     })
     const finalMessage = finalState.messages[finalState.messages.length - 1].content ?? ''
     console.log(finalMessage)
@@ -47,7 +55,7 @@ export default async function Booking() {
     return (
         <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
         <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-            <span>content</span>
+            <span>{appointmentRequest}</span>
             <div>
             {finalMessage.toString()}
             </div>
