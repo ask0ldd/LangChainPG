@@ -5,7 +5,9 @@ import { END, MessagesAnnotation, START, StateGraph } from "@langchain/langgraph
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import orderRetrievalTool from "./_tools/orderRetrievalTool";
 
-export default async function Graph() {
+// https://js.langchain.com/docs/tutorials/chatbot/
+
+export default async function Chatbot() {
 
     const tools = [orderRetrievalTool]
     const model = new ChatGroq({
