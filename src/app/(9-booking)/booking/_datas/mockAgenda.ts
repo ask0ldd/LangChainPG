@@ -5,7 +5,7 @@ const mockAgenda = [
   { start: "2025-10-29T10:00:00Z", end: "2025-10-29T10:30:00Z", patient: null },
   { start: "2025-10-29T10:30:00Z", end: "2025-10-29T11:00:00Z", patient: "John Doe" },
   { start: "2025-10-29T11:00:00Z", end: "2025-10-29T11:30:00Z", patient: null },
-  { start: "2025-10-29T13:00:00Z", end: "2025-10-29T13:30:00Z", patient: null },
+  { start: "2025-10-29T13:00:00Z", end: "2025-10-29T13:30:00Z", patient: "John Doe" },
   { start: "2025-10-29T13:30:00Z", end: "2025-10-29T14:00:00Z", patient: null },
   { start: "2025-10-29T14:00:00Z", end: "2025-10-29T14:30:00Z", patient: null },
   { start: "2025-10-29T14:30:00Z", end: "2025-10-29T15:00:00Z", patient: null },
@@ -33,19 +33,19 @@ const mockAgenda = [
 
 // Helper to generate day slots
 function generateDaySlots(date : string) {
-  const slots = [];
-  const times = ["09:00","09:30","10:00","10:30","11:00","13:00","13:30","14:00","14:30","15:00"];
+  const slots = []
+  const times = ["09:00","09:30","10:00","10:30","11:00","13:00","13:30","14:00","14:30","15:00"]
   for (const t of times) {
-    const [hour, minute] = t.split(":").map(Number);
-    const endMinute = minute + 30;
-    const endHour = endMinute >= 60 ? hour + 1 : hour;
-    const endMin = endMinute >= 60 ? endMinute - 60 : endMinute;
-    const pad = (n : number) => String(n).padStart(2, "0");
+    const [hour, minute] = t.split(":").map(Number)
+    const endMinute = minute + 30
+    const endHour = endMinute >= 60 ? hour + 1 : hour
+    const endMin = endMinute >= 60 ? endMinute - 60 : endMinute
+    const pad = (n : number) => String(n).padStart(2, "0")
     slots.push({
       start: `${date}T${pad(hour)}:${pad(minute)}:00Z`,
       end: `${date}T${pad(endHour)}:${pad(endMin)}:00Z`,
       patient: null
-    });
+    })
   }
   return slots;
 }
