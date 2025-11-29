@@ -42,7 +42,8 @@ export default async function Booking() {
     ]);
 
     // const appointmentRequest = "I would like to set an appointment for next monday in the afternoon"
-    const appointmentRequest = "I would like to schedule an appointment for november the 4th during the afternoon."
+    // const appointmentRequest = "I would like to schedule an appointment for november the 4th during the afternoon."
+    const appointmentRequest = "I would like to schedule an appointment for october the 29th during the afternoon."
     // const appointmentRequest2 = "I would like to schedule an appointment for november the 4th during the afternoon. Give me the latest free slot."
 
     // Use the graph
