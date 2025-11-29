@@ -27,6 +27,7 @@ function findBestAppointment(input: { availableFrom?: string; availableTo?: stri
 
     const bestSlot = availableSlots[0];
     console.log(bestSlot)
+    // !!! should update agenda
     return `Best available appointment: ${bestSlot.start} to ${bestSlot.end} (UTC)`;
 }
 
