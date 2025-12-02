@@ -1,7 +1,7 @@
 import { tool } from "@langchain/core/tools";
 import sendEmailSchema from "../_schemas/sendEmailSchema";
 
-const sendEmail = tool(
+const sendEmailTool = tool(
   async ({ to, subject, body, cc }) => {
     // !!! Stub: In practice, this would call SendGrid, Gmail API, etc.
     return `Email sent to ${to.join(', ')} - Subject: ${subject}`;
