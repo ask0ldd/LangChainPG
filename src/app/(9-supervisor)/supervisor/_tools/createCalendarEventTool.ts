@@ -1,7 +1,7 @@
 import { tool } from "@langchain/core/tools";
 import createCalendarEventSchema from "../_schemas/createCalendarEventSchema";
 
-const createCalendarEvent = tool(
+const createCalendarEventTool = tool(
   async ({ title, startTime, endTime, attendees, location }) => {
     // Stub: In practice, this would call Google Calendar API, Outlook API, etc.
     return `Event created: ${title} from ${startTime} to ${endTime} with ${attendees.length} attendees`
@@ -12,3 +12,5 @@ const createCalendarEvent = tool(
     schema: createCalendarEventSchema,
   }
 )
+
+export default createCalendarEventTool

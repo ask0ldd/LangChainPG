@@ -12,3 +12,5 @@ const sendEmailTool = tool(
     schema: sendEmailSchema,
   }
 )
+
+export default sendEmailTool
