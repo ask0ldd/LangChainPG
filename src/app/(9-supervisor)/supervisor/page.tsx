@@ -8,6 +8,8 @@ import orderRetrievalTool from "./_tools/orderRetrievalTool";
 // https://js.langchain.com/docs/tutorials/chatbot/
 // https://docs.langchain.com/oss/javascript/langchain/supervisor
 
+// create a tool (accepting a defined in depth schema) > link it to an agent > create a tool from that agent (accepting natural language request) > link it to a new agent > called by supervisor
+
 export default async function Chatbot() {
 
     const tools = [orderRetrievalTool]

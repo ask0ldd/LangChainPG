@@ -31,13 +31,14 @@ export default async function Booking() {
     const compiledGraph = workflow.compile()
 
     const agendaBookingPromptTemplate = ChatPromptTemplate.fromMessages([
-        ["system", `You are a booking assistant. Your goal is to find and suggest the appointment that best matches the customer’s request. 
+        ["system", `
+            You are a booking assistant. Your goal is to find and suggest the appointment that best matches the customer’s request. 
             Use the provided booking tool to search available slots. 
             Morning appointments are between 09:00:00 and 11:30:00.
             Afternoon appointments are between 13:00:00 and 15:30:00.
             The current year is 2025. 
             Always provide times in the specified format (HH:MM:SS).
-        `],
+        `.trim()],
         ["human", `Customer request : "{request}"`]
     ]);
 
