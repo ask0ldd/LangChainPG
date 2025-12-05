@@ -35,11 +35,11 @@ export default async function Graph() {
         ["human", `Rate the following review: "{review}". Simply output the adjective best describing the sentiment associated with the review.`]
     ]);
 
-    const negativeReview = "The product is far too large. It doesn't seem the match an european XL size."
+    const NEGATIVE_REVIEW = "The product is far too large. It doesn't seem the match an european XL size."
 
     // Use the graph
     const finalState = await compiledGraph.invoke({ 
-      messages: await sentimentPromptTemplate.formatMessages({review : negativeReview})
+      messages: await sentimentPromptTemplate.formatMessages({review : NEGATIVE_REVIEW})
     })
     const finalMessage = finalState.messages[finalState.messages.length - 1].content ?? ''
     console.log(finalMessage)
@@ -47,10 +47,12 @@ export default async function Graph() {
     return (
         <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
         <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-            <span>content</span>
-            <div>
+            <span className="border-b-1 border-black">Customer Review</span>
+            <span>{NEGATIVE_REVIEW}</span>
+            <span>Sentiment Analysis</span>
+            <span>
             {finalMessage.toString()}
-            </div>
+            </span>
         </main>
         </div>
     );
