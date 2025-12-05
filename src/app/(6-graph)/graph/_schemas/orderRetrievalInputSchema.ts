@@ -1,8 +1,8 @@
 import { z } from "zod/v4"
 
 const orderRetrievalInputSchema = z.object({
-  orderId: z.string().optional(),
-  customerName: z.string().optional()
+  orderId: z.string().optional().describe('Unique id associated to the order'),
+  customerName: z.string().optional().describe('Name of the customer')
 }).refine(
   data => data.orderId || data.customerName,
   {
