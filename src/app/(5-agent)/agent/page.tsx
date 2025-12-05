@@ -9,6 +9,9 @@ import sentimentAnalyzerTool from "./_tools/sentimentAnalyzerTool";
 // https://github.com/in-tech-gration/LangChain.js
 // https://langchain-ai.github.io/langgraphjs/tutorials/quickstart/?ajs_aid=4c487466-0b7f-4925-96a6-a76122227d21#making-your-first-agent-using-langgraph
 
+// un seul agent
+// pass tools, model, checkpoint saver
+// pass a prompt
 export default async function Agent(){
 
   const agentModel = new ChatGroq({
@@ -28,7 +31,7 @@ export default async function Agent(){
   })
 
   const sentimentPromptTemplate = ChatPromptTemplate.fromMessages([
-    ["system", "You are a customer feedback analysis assistant."],
+    ["system", "You are a customer feedback analysis assistant. If needed, you can use a sentiment analyzing tool to analyze a product review."],
     ["human", `Rate the following review: "{review}".`]
   ]);
 
@@ -36,11 +39,14 @@ export default async function Agent(){
     ["human", "If the review is negative, respond with a brief apology. If it is positive, reply with a short thank-you message. All messages should be 3-liners and as specific as possible."]
   ]);
 
-  const negativeReview = "The product is far too large. It doesn't seem the match an european XL size."
-  const positiveReview = "The product match the picture as it is beautiful and stylish."
+  const REVIEWS = {
+    positive : "The product match the picture as it is beautiful and stylish.",
+    negative : "The product is far too large. It doesn't seem the match an european XL size."
+  }
+
   const agentSentimentState = await agent.invoke(
     { 
-      messages: await sentimentPromptTemplate.formatMessages({review : negativeReview})
+      messages: await sentimentPromptTemplate.formatMessages({review : REVIEWS.negative})
     },
     { configurable: { thread_id: "42" } },
   )
@@ -62,12 +68,11 @@ export default async function Agent(){
 
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <span>content</span>
-        <div>
-          LangGraph
-        </div>
-      </main>
+        {apologyState.messages[apologyState.messages.length - 1].content ? 
+        <main className="flex flex-col row-start-2 items-center sm:items-start w-full max-w-[1440px]">
+            <span className="p-[20px] bg-blue-100 w-full">Q : {REVIEWS.negative}</span>
+            <span className="p-[20px]">A : {apologyState.messages[apologyState.messages.length - 1].content.toString().replace(/<think>[\s\S]*?<\/think>/g, '').trim()}</span>
+        </main> : <main>loading</main>}
     </div>
   );
 }
