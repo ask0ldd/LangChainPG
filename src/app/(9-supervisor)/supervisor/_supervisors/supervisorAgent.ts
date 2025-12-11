@@ -1,14 +1,8 @@
 import { ChatGroq } from "@langchain/groq";
 import { MemorySaver } from "@langchain/langgraph";
 import { createReactAgent } from "@langchain/langgraph/prebuilt";
-import faqAgent, { faqAgentAsTool } from "../_agents/faqAgent";
-
-const SUPERVISOR_PROMPT = `
-You are a helpful personal assistant.
-You can schedule calendar events and send emails.
-Break down user requests into appropriate tool calls and coordinate the results.
-When a request involves multiple actions, use multiple tools in sequence.
-`.trim();
+import { faqAgentAsTool } from "../_agents/faqAgent";
+import SUPERVISOR_PROMPT from "../_prompts/supervisorPrompt";
 
 const model = new ChatGroq({
     model: "openai/gpt-oss-20b",
