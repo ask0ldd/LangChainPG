@@ -1,7 +1,7 @@
 import { OllamaEmbeddings } from "@langchain/ollama";
-import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
+import { Document } from "@langchain/core/documents";
 import clothingItems from "../_datas/clothingItems";
-import { Document } from "langchain/document"; // !!! import Document
 
 const embeddingModel = new OllamaEmbeddings()
 const itemsVectorStore = new MemoryVectorStore(embeddingModel);
