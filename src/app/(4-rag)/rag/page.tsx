@@ -1,11 +1,12 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatGroq } from "@langchain/groq";
 import { OllamaEmbeddings } from "@langchain/ollama";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { MemoryVectorStore } from "@langchain/classic/vectorstores/memory";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+import { Document } from "@langchain/core/documents";
+// import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { stateOfTheUnionDoc } from "./_docs/stateoftheunion";
-import { Document } from "langchain/document"; // !!! import Document
-// https://js.langchain.com/docs/tutorials/rag/
+// https://docs.langchain.com/oss/javascript/langchain/rag
 // positionnement dans l'espace
 // valeur semantique
 // image vector space :  https://miro.medium.com/v2/resize:fit:1400/1*8sTPaluiGbuY0UVHLO563A.png
@@ -35,6 +36,7 @@ export default async function RAG() {
   });
 
   const splits = await splitter.splitText(stateOfTheUnionDoc);
+  console.log(splits)
 
   const documents = splits.map(
     (text, idx) => new Document({ pageContent: text, metadata: { chunk: idx } })
